@@ -1,26 +1,45 @@
 import React, { useState } from 'react';
 
-const RatingButton = ({name, color, setRating}) => {
+const RatingButton = ({name, color, setRating, setActive, setSelected, selected}) => {
 
-    const [active, setActive] = useState();
+    const highlight = (e) => {
+        setActive(true);
+        e.target.style.backgroundColor = color;
+        e.target.style.color = 'white'
+        e.target.style.fontWeight = 'bold'
+    }
 
-    const clickHandler = (event) => {
-        console.log(event);
+    const clickHandler = (e) => {
+        if (e.key === 'Enter' && !selected){
+            setSelected({name: name, color: color});
+            highlight(e);  
+        }
+        else if (!selected){
+            setSelected({name: name, color: color});
+            highlight(e);
+        }
     }
     
     const mouseOverHandler = (e) => {
-        setActive('active');
-        setRating({text: `${name.toLowerCase()}.`, color: color});
+        if (!selected){
+            highlight(e);
+            setRating({text: `${name.toLowerCase()}.`, color: color});
+        }
     }
     
-    const mouseLeaveHandler = () => {
-        setActive('inactive');
-        setRating({text: '', color: null})
+    const mouseLeaveHandler = (e) => {
+        if (!selected){
+            setActive(false);
+            e.target.style.backgroundColor = 'white';
+            e.target.style.color = 'black'
+            e.target.style.fontWeight = ''
+            setRating({text: '', color: null})         
+        }
     }
 
     return (
-        <button className={`option ${active}`} onClick={clickHandler} onMouseOver={(e) => mouseOverHandler(e)} onMouseLeave={mouseLeaveHandler} 
-        style={{borderColor: color}}>
+        <button className={`option`} onClick={(e) => clickHandler(e)} onMouseOver={(e) => mouseOverHandler(e)} onKeyDown={e => clickHandler(e)} onMouseLeave={e => mouseLeaveHandler(e)} onFocus={e => mouseOverHandler(e)} onBlur={e => mouseLeaveHandler(e)} 
+        style={{borderColor: color}} >
             {name}
         </button>
     )

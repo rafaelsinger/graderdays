@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const RatingButton = ({name, color, setRating, setActive, setSelected, selected, setDisplayBox}) => {
+const RatingButton = ({name, color, setRating, setActive, setSelected, selected}) => {
 
     const highlight = (e) => {
         setActive(true);

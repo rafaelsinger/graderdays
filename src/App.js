@@ -1,7 +1,15 @@
+import React, { useState } from 'react';
+import 'react-calendar/dist/Calendar.css'
+import Calendar from 'react-calendar'
+import Rating from './Rating'
+
 function App() {
+const [value, onChange] = useState(new Date());
+
   return (
     <div className="App">
-      <div>Hello world</div>
+      {/* <Calendar onChange={onChange} value={value} defaultView={'day'}/> */}
+      <Rating />
     </div>
   );
 }

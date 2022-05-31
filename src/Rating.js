@@ -8,7 +8,7 @@ const Rating = () => {
 
     useEffect(() => {
         if (selected){
-            console.log('i work')
+            console.log('it works')
         }
     }, [selected])
 

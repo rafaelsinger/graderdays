@@ -10,11 +10,14 @@ const RatingButton = ({name, color, setRating, setActive, setSelected, selected}
     }
 
     const clickHandler = (e) => {
-        if (e.key === 'Enter' && !selected){
+        if (!selected){
             setSelected({name: name, color: color});
-            highlight(e);  
+            highlight(e);
         }
-        else if (!selected){
+    }
+
+    const enterHandler = (e) => {
+        if (!selected && e.key === 'Enter'){
             setSelected({name: name, color: color});
             highlight(e);
         }
@@ -38,7 +41,7 @@ const RatingButton = ({name, color, setRating, setActive, setSelected, selected}
     }
 
     return (
-        <button className={`option`} onClick={(e) => clickHandler(e)} onMouseOver={(e) => mouseOverHandler(e)} onKeyDown={e => clickHandler(e)} onMouseLeave={e => mouseLeaveHandler(e)} onFocus={e => mouseOverHandler(e)} onBlur={e => mouseLeaveHandler(e)} 
+        <button className={`option`} onClick={(e) => clickHandler(e)} onMouseOver={(e) => mouseOverHandler(e)} onKeyDown={e => enterHandler(e)} onMouseLeave={e => mouseLeaveHandler(e)} onFocus={e => mouseOverHandler(e)} onBlur={e => mouseLeaveHandler(e)} 
         style={{borderColor: color}} >
             {name}
         </button>

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const RatingButton = ({name, color, setRating, setActive, setSelected, selected}) => {
+const RatingButton = ({name, color, setRating, setActive, setSelected, selected, setDisplayBox}) => {
 
     const highlight = (e) => {
         setActive(true);
@@ -11,14 +11,15 @@ const RatingButton = ({name, color, setRating, setActive, setSelected, selected}
 
     const clickHandler = (e) => {
         if (!selected){
-            setSelected({name: name, color: color});
+            setSelected(true);
             highlight(e);
+            // e.target.hidden = true;
         }
     }
 
     const enterHandler = (e) => {
         if (!selected && e.key === 'Enter'){
-            setSelected({name: name, color: color});
+            setSelected(true);
             highlight(e);
         }
     }
@@ -40,8 +41,14 @@ const RatingButton = ({name, color, setRating, setActive, setSelected, selected}
         }
     }
 
+    const handleTransitionEnd = (e) => {
+        if (selected){
+            e.target.style.display = 'none';
+        }
+    }
+
     return (
-        <button className={`option`} onClick={(e) => clickHandler(e)} onMouseOver={(e) => mouseOverHandler(e)} onKeyDown={e => enterHandler(e)} onMouseLeave={e => mouseLeaveHandler(e)} onFocus={e => mouseOverHandler(e)} onBlur={e => mouseLeaveHandler(e)} 
+        <button className={selected?`option fade-out`:'option'} onTransitionEnd={e => handleTransitionEnd(e)} onClick={(e) => clickHandler(e)} onMouseOver={(e) => mouseOverHandler(e)} onKeyDown={e => enterHandler(e)} onMouseLeave={e => mouseLeaveHandler(e)} onFocus={e => mouseOverHandler(e)} onBlur={e => mouseLeaveHandler(e)} 
         style={{borderColor: color}} >
             {name}
         </button>

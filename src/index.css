@@ -103,3 +103,21 @@ body {
 .rating-text-exit-done {
   opacity: 0;
 }
+
+.fade-out{
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s 0.4s, opacity 0.4s linear;
+}
+
+.fade-in{
+  visibility: visible;
+  opacity: 1;
+  transition: visibility 1s 0.4s, opacity 0.4s linear;
+}
+
+.notebox{
+  width: 105px;
+  height: 305px;
+  border: 1px solid black;
+}

@@ -5,10 +5,13 @@ const Rating = () => {
     const [rating, setRating] = useState({text: '', color: null})
     const [active, setActive] = useState(false);
     const [selected, setSelected] = useState(null);
+    const [displayBox, setDisplayBox] = useState(false);
 
     useEffect(() => {
         if (selected){
-            console.log('it works')
+            setTimeout(() => {
+                setDisplayBox(true);
+            }, 390)
         }
     }, [selected])
 
@@ -25,14 +28,15 @@ const Rating = () => {
                 <h4 className='dateSubtitle'>{currentDate}</h4> 
                 <div className='rating-box'>My day was<span style={{color: rating.color}}>&nbsp;{rating.text}</span></div>
                     <div className='buttom-select-menu'>
-                        <RatingButton name={'Amazing'} color={'#006d05'} setRating={setRating} setActive={setActive} setSelected={setSelected} selected={selected} />
-                        <RatingButton name={'Great'} color={'#3d8532'} setRating={setRating} setActive={setActive} setSelected={setSelected} selected={selected} />
-                        <RatingButton name={'Good'} color={'#88b77b'} setRating={setRating} setActive={setActive} setSelected={setSelected} selected={selected} />
-                        <RatingButton name={'Okay'} color={'#E5D50F'} setRating={setRating} setActive={setActive} setSelected={setSelected} selected={selected}/>
-                        <RatingButton name={'Bad'} color={'#D66C65'} setRating={setRating} setActive={setActive} setSelected={setSelected} selected={selected}/>
-                        <RatingButton name={'Awful'} color={'#A83030'} setRating={setRating} setActive={setActive} setSelected={setSelected} selected={selected}/>
-                        <RatingButton name={'Horrible'} color={'#7d0600'} setRating={setRating} setActive={setActive} setSelected={setSelected} selected={selected}/>
+                        <RatingButton name={'Amazing'} color={'#006d05'} setRating={setRating} setActive={setActive} setSelected={setSelected} selected={selected} setDisplayBox={setDisplayBox} />
+                        <RatingButton name={'Great'} color={'#3d8532'} setRating={setRating} setActive={setActive} setSelected={setSelected} selected={selected} setDisplayBox={setDisplayBox} />
+                        <RatingButton name={'Good'} color={'#88b77b'} setRating={setRating} setActive={setActive} setSelected={setSelected} selected={selected} setDisplayBox={setDisplayBox} />
+                        <RatingButton name={'Okay'} color={'#E5D50F'} setRating={setRating} setActive={setActive} setSelected={setSelected} selected={selected} setDisplayBox={setDisplayBox} />
+                        <RatingButton name={'Bad'} color={'#D66C65'} setRating={setRating} setActive={setActive} setSelected={setSelected} selected={selected} setDisplayBox={setDisplayBox} />
+                        <RatingButton name={'Awful'} color={'#A83030'} setRating={setRating} setActive={setActive} setSelected={setSelected} selected={selected} setDisplayBox={setDisplayBox} />
+                        <RatingButton name={'Horrible'} color={'#7d0600'} setRating={setRating} setActive={setActive} setSelected={setSelected} selected={selected} setDisplayBox={setDisplayBox} />
                     </div>
+                    {displayBox && <div className='notebox'></div>}
             </div>
         </div>
     )

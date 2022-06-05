@@ -27,7 +27,7 @@ const RatingButton = ({name, color, setRating, setActive, setSelected, selected}
     const mouseOverHandler = (e) => {
         if (!selected){
             highlight(e);
-            setRating({text: `${name.toLowerCase()}.`, color: color});
+            setRating({text: `${name.toLowerCase()}.`, color: color, date: new Date()});
         }
     }
     

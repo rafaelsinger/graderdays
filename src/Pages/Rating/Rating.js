@@ -2,8 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import RatingButton from './RatingButton'
 import Notebox from './Notebox'
 
-const Rating = () => {
-    const [rating, setRating] = useState({text: '', color: null})
+const Rating = ({rating, setRating}) => {
     const [active, setActive] = useState(false);
     const [selected, setSelected] = useState(null);
     const [displayBox, setDisplayBox] = useState(false);
@@ -17,8 +16,11 @@ const Rating = () => {
     }, [selected])
 
     const day = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+    const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
     const currentDay = day[(new Date()).getDay()];
     let currentDate = (new Date()).toDateString().split(' ').slice(1);
+    currentDate[0] = monthNames[(new Date()).getMonth()];
+    if (currentDate[1] < 10){ currentDate[1] = currentDate[1].slice(1) }
     currentDate[1] = currentDate[1] + ','
     currentDate = currentDate.join(' ');
 
@@ -38,7 +40,7 @@ const Rating = () => {
                             <RatingButton name={'Awful'} color={'#A83030'} setRating={setRating} setActive={setActive} setSelected={setSelected} selected={selected} setDisplayBox={setDisplayBox} />
                             <RatingButton name={'Horrible'} color={'#7d0600'} setRating={setRating} setActive={setActive} setSelected={setSelected} selected={selected} setDisplayBox={setDisplayBox} />
                         </div>
-                        {displayBox && <Notebox />}
+                        {displayBox && <Notebox rating={rating} setRating={setRating} />}
                     </div>
             </div>
         </div>

@@ -4,43 +4,76 @@ import { differenceInCalendarDays, parseISO } from 'date-fns';
 
 const Home = ({rating}) => {
 
-    let ratingDates = [];
+    const [allRatings, setAllRatings] = useState([]);
 
     useEffect(() => {
-        //create logic to check that it doesnt add the same day twice
-        if (rating.date){ 
-            ratingDates.push(rating.date) 
-        }
-    }, [rating.note])
+        if (allRatings.length === 0){ 
+            setAllRatings([rating])
+        } else if (!allRatings.includes(rating)) { 
+            setAllRatings(ratings => [...ratings, rating] )
+        }  
+    }, [rating])
 
-    console.log(ratingDates);
+    console.log(allRatings)
 
-
-    // const date1 = parseISO('2022-06-05');
-    // const date2 = parseISO('2022-06-07');
-    // const date3 = parseISO('2022-06-10');
-    // const datesToAddClassTo = [date1, date2, date3];
-
-    const isSameDay = (a, b) => {
-        return differenceInCalendarDays(a, b) === 0;
+    const isSameDay = (rating, calendarDate) => {
+        return differenceInCalendarDays(rating.date, calendarDate) === 0;
     }
 
-    function tileClassName({ date, view }) {
-        // Check if a date React-Calendar wants to check is on the list of dates to add class to
-        if (ratingDates.find(dDate => isSameDay(dDate, date))) {
-            return 'testClass';
+    const tileClassName = ({date}) => {
+        const foundRating = allRatings.find(rating => isSameDay(rating, date));
+        if (foundRating){
+            return `${foundRating.text.replace('.','')} rating`
         }
     }
 
-    // const [value, setValue] = useState(new Date());
+    // const [ratings, setRatings] = useState([]);
 
-    // return (
-    //   <Calendar
-    //     onChange={onChange}
-    //     value={date}
-    //     tileClassName={tileClassName}
-    // />
-    // );
+    // useEffect(() => {
+    //     const data = localStorage.getItem('ratings');
+    //     if (data){
+    //         const stringRatings = JSON.parse(data);
+    //         console.log('i should be setting to ', stringRatings)
+    //         setRatings(stringRatings);
+    //     }
+    // }, [])
+
+    // console.log(ratings)
+
+    // useEffect(() => {
+    //     if (ratings.length === 0){
+    //         setRatings([...ratings, rating])
+    //     } else if (ratings[ratings.length-1].date !== rating.date && rating.date !== null){
+    //         setRatings([...ratings, rating])
+    //     }
+    // }, [rating])
+
+
+    // useEffect(() => {
+    //     if (ratings.length > 0 && ratings[0].date !== null){
+    //         localStorage.setItem('ratings', JSON.stringify(ratings))
+    //     }
+    // }, [ratings])
+
+    // function tileClassName({ date }) {
+    //     // Check if a date React-Calendar wants to check is on the list of dates to add class to
+    //     console.log(date.getDay());
+    //     console.log(ratings[0])
+    //     // console.log(ratings[0].date)
+    //     const hasDate = ratings.hasOwnProperty(parseISO(date));
+    //     console.log(hasDate);
+    //     // const currRating = 
+    //     // if (ratings.find(dDate => isSameDay(dDate, date))) {
+    //     //     // const grade = dates.find(date => isSameDay(date, ratings));
+    //     //     // console.log(grade);
+    //     //     return 'testClass';
+    //     // }
+    // }
+
+    // function tileClassName({date}){
+    //     return;
+    // }
+
     const [value, setValue] = useState(new Date());
 
     function onChange(nextValue) {

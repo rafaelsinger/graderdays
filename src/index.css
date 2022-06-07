@@ -309,8 +309,69 @@ abbr{
   display: none;
 }
 
-.testClass{
-  background: #006d05;  
+.rating{
   color: white;
 }
 
+.amazing{
+  background: #006d05;  
+}
+
+.amazing:enabled:hover,
+.amazing:enabled:focus{
+  background: #007e06;
+}
+
+.great{
+  background: #3d8532;
+}
+
+.great:enabled:hover,
+.great:enabled:focus{
+  background: #008f07;
+}
+
+.good{
+  background: #88b77b;
+}
+
+.good:enabled:hover,
+.good:enabled:focus{
+  background: #92bd86;
+}
+
+.okay{
+  background: #E5D50F;
+}
+
+.okay:enabled:hover,
+.okay:enabled:focus{
+  background: #f1e225;
+}
+
+.bad{
+  background: #D66C65;
+}
+
+.bad:enabled:hover,
+.bad:enabled:focus{
+  background: #da7972;
+}
+
+.awful{
+  background: #A83030;
+}
+
+.awful:enabled:hover,
+.awful:enabled:focus{
+  background: #c23838;
+}
+
+.horrible{
+  background: #7d0600;
+}
+
+.horrible:enabled:hover,
+.horrible:enabled:focus{
+  background: #9f0800;
+}

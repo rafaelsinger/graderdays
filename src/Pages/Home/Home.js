@@ -1,8 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import Calendar from 'react-calendar';
 import { differenceInCalendarDays, parseISO } from 'date-fns';
+import { signOut } from 'firebase/auth';
+import { auth } from '../../firebase-config';
+import { useNavigate } from 'react-router-dom';
+import Logout from './Logout';
 
-const Home = ({rating}) => {
+const Home = ({rating, name, setAuth}) => {
 
     const [allRatings, setAllRatings] = useState([]);
 
@@ -13,8 +17,6 @@ const Home = ({rating}) => {
             setAllRatings(ratings => [...ratings, rating] )
         }  
     }, [rating])
-
-    console.log(allRatings)
 
     const isSameDay = (rating, calendarDate) => {
         return differenceInCalendarDays(rating.date, calendarDate) === 0;
@@ -81,16 +83,19 @@ const Home = ({rating}) => {
     }
   
     return (
-        <div className='calendar-container'>
-         <h3 className='dateTitle'>Rafael's Month</h3>
-         <Calendar
-            onChange={onChange}
-            value={value}
-            tileClassName={tileClassName}
-            maxDetail={'month'}
-            minDetail={'month'}
-         />
-        </div>
+        <>
+            <Logout setAuth={setAuth} />
+            <div className='calendar-container'>
+            <h3 className='dateTitle'>{name}'s Month</h3>
+            <Calendar
+                onChange={onChange}
+                value={value}
+                tileClassName={tileClassName}
+                maxDetail={'month'}
+                minDetail={'month'}
+            />
+            </div>
+        </>
     );
 }
 

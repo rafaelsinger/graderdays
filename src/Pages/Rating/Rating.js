@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import RatingButton from './RatingButton'
 import Notebox from './Notebox'
 
-const Rating = ({rating, setRating}) => {
+const Rating = ({rating, name, setRating}) => {
     const [active, setActive] = useState(false);
     const [selected, setSelected] = useState(null);
     const [displayBox, setDisplayBox] = useState(false);
@@ -26,10 +26,10 @@ const Rating = ({rating, setRating}) => {
 
     return (
         <div className='wrapper'>
-            <div className='rating-container' style={active?{border: `3px solid ${rating.color}`}:{}} >
-                <h3 className='dateTitle'>Rafael's {currentDay}</h3>
+            <div className='rating-container' style={active?{border: `3px solid ${rating?.color}`}:{}} >
+                <h3 className='dateTitle'>{name}'s {currentDay}</h3>
                 <h4 className='dateSubtitle'>{currentDate}</h4> 
-                <div className='rating-box'>My day was<span style={{color: rating.color}}>&nbsp;{rating.text}</span></div>
+                <div className='rating-box'>My day was<span style={{color: rating?.color}}>&nbsp;{rating?.text}</span></div>
                     <div className='inner-rating-container'>
                         <div className='buttom-select-menu'>
                             <RatingButton name={'Amazing'} color={'#006d05'} setRating={setRating} setActive={setActive} setSelected={setSelected} selected={selected} setDisplayBox={setDisplayBox} />

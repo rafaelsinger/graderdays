@@ -165,7 +165,18 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  height: calc(100vh - 100px);
+}
+
+.options-container{
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  height:40px
+}
+
+.options-container > * {
+  margin: 10px 20px
 }
 
 /* CALENDAR STYLES */
@@ -428,12 +439,18 @@ abbr{
 
 .introSplash{
   text-align: center;
-  font-size: 5rem;
-  margin: 0 0 2rem 0;
+  font-size: 7rem;
+  margin: 0 0 0.5rem 0;
   background: #D66C65;
   background: linear-gradient(to right, #D66C65 20%, #E5D50F 40%, #88B77B 60%, #3D8532 80%, #006D05 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+}
+
+.tagline{
+  margin: 0 0 3rem;;
+  font-weight: 300;
+  font-size: 1.2rem;
 }
 
 @keyframes fadein {
@@ -463,4 +480,82 @@ abbr{
 @-o-keyframes fadein {
   from { opacity: 0; }
   to   { opacity: 1; }
+}
+
+.rating-modal{
+  top: 40px;
+  bottom: 40px;
+  border: 1px solid #ccc;
+  background: #fff;
+  overflow: auto;
+  border-radius: 4px;
+  outline: none;
+  padding: 20px;
+  position: absolute; 
+  left: 0; 
+  right: 0; 
+  margin-left: auto; 
+  margin-right: auto; 
+  width: 50%;
+  height: 80%;
+}
+
+.ReactModal__Overlay {
+  opacity: 0;
+  transition: opacity 200ms ease-in-out;
+}
+
+.ReactModal__Overlay--after-open{
+  opacity: 1;
+}
+
+.ReactModal__Overlay--before-close{
+  opacity: 0;
+}
+
+.modal-content-container{
+  display: flex;
+  flex-direction: column;
+}
+
+.modal-close-btn{
+  opacity: 0.5;
+  width: 4rem;
+  justify-self: end
+}
+
+.modal-close-btn::before{
+  content: '';
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 4px;
+  color: black;
+  transform: rotate(45deg);
+}
+
+.close {
+  display: block;
+  background: url('/public/svgs/close.svg');
+  background-size: 23px 23px;
+  background-repeat: no-repeat;
+  background-position: center center;
+  width: 23px;
+  height: 23px;
+  border: none;
+  cursor: pointer;
+  opacity: 0.9;
+  align-self: flex-end;
+}
+
+.close:hover{
+  opacity: 1;
+}
+
+/* PHONE MEDIA QUERY */
+@media screen and (max-width: 700px) {
+  .rating-modal{
+    width: 80%;
+    height: 50%;
+  }
 }

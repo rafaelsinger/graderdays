@@ -1,9 +1,10 @@
 import React, {useState} from 'react'
 import Modal from 'react-modal';
+import Notebox from '../Rating/Notebox'
 
 Modal.setAppElement('#root');
 
-const RatingModal = ({modalIsOpen, setIsOpen, date}) => {
+const RatingModal = ({modalIsOpen, setIsOpen, date, rating, setRating}) => {
 
     function openModal() {
         setIsOpen(true);
@@ -35,6 +36,16 @@ const RatingModal = ({modalIsOpen, setIsOpen, date}) => {
                 <button className='close' onClick={closeModal}></button>
                 <h2 className='dateTitle' style={{margin: 0}}>{currentDay}</h2>
                 <h4 className='dateSubtitle' style={{width: '50%', textAlign: 'center', alignSelf: 'center'}}>{currentDate}</h4>
+                <div className='button-container'>
+                    <button className='option in-modal'>test btn</button>
+                    <button className='option in-modal'>test btn</button>
+                    <button className='option in-modal'>test btn</button>
+                    <button className='option in-modal'>test btn</button>
+                    <button className='option in-modal'>test btn</button>
+                    <button className='option in-modal'>test btn</button>
+                    <button className='option in-modal'>test btn</button>
+                </div>
+                <Notebox rating={rating} setRating={setRating} modal={true} />
             </div>
         </Modal>
     )

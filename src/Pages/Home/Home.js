@@ -6,30 +6,59 @@ import { useNavigate } from 'react-router-dom';
 import Logout from './Logout';
 import RatingModal from './RatingModal';
 import { query, getDocs, collection, where, doc } from 'firebase/firestore';
+import { onAuthStateChanged } from 'firebase/auth';
+import Loading from '../Loading';
 
-const Home = ({rating, name, setAuth, setName}) => {
+const Home = ({rating, name, setAuth, setName, setRating}) => {
 
     const [allRatings, setAllRatings] = useState([]);
+    const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
-        const fetchData = async () => {
-            const q = await getDocs(collection(db, "users", auth.currentUser?.uid, "dailyratings"));
-            q.forEach((doc) => {
-                if (allRatings.length === 0){ 
-                    setAllRatings([doc.data()])
-                } else if (!allRatings.includes(doc.data().date)){ 
-                    setAllRatings(ratings => [...ratings, doc.data()] )
-                }  
-            })
-            // const doc = await getDocs(q);
-            // const data = q.docs[0].data();
-            // console.log(data);
-        }
-        fetchData();
-        // console.log(fetchData());
+        setIsLoading(true);
+        onAuthStateChanged(auth, (user) => {
+            if (user){
+                fetchData(user);
+            } 
+        })
     }, [])
 
-    console.log(allRatings);
+
+    const fetchData = async (user) => {
+        try{
+            const q = await getDocs(collection(db, "users", user.uid, "dailyratings"));
+            q.forEach((doc) => {
+                // if (allRatings.length === 0 && !allRatings.includes(doc.data())){ 
+                setAllRatings((ratings) => [...ratings, doc.data()]) 
+                // }
+                //     setAllRatings([doc.data()])
+                // } else if (!allRatings.includes(doc.data().date)){ 
+                //     setAllRatings(ratings => [...ratings, doc.data()] )
+                // }  
+            })
+            setIsLoading(false);
+        } catch (err) {
+            //eventually have proper error message page
+            setIsLoading(false);
+            console.error(err);
+        }   
+        // const doc = await getDocs(q);
+        // const data = q.docs[0].data();
+        // console.log(data);
+    }
+    // console.log(allRatings);
+
+
+    /*
+    *STRUCTURE OF THE RATING OBJECT FROM FIRESTORE:
+        rating:
+        color: "#006d05"
+        date: at {seconds: 1654846611, nanoseconds: 893000000}
+        note: "IT WAS AMAZING"
+        text: "amazing."
+    */
+
+    // console.log(allRatings);
 
     // useEffect(() => {
     //     if (allRatings.length === 0){ 
@@ -40,14 +69,13 @@ const Home = ({rating, name, setAuth, setName}) => {
     // }, [rating])
 
     const isSameDay = (rating, calendarDate) => {
-        // return differenceInCalendarDays(rating?.date.toDateString(), calendarDate) === 0;
-        return;
+        return differenceInCalendarDays(rating.rating.date?.toDate(), calendarDate) === 0;
     }
 
     const tileClassName = ({date}) => {
         const foundRating = allRatings.find(rating => isSameDay(rating, date));
         if (foundRating){
-            return `${foundRating.text.replace('.','')} rating`
+            return `${foundRating.rating.text.replace('.','')} rating`
         }
     }
 
@@ -114,7 +142,8 @@ const Home = ({rating, name, setAuth, setName}) => {
                 <Logout setAuth={setAuth} setName={setName} />
                 <div>profile</div>
             </div>
-            <div className='calendar-container'>
+            
+            {isLoading ? <Loading /> : <div className='calendar-container'>
                 <h3 className='dateTitle'>{name}'s Month</h3>
                 <Calendar
                     onChange={(e) => onChange(e)}
@@ -123,8 +152,8 @@ const Home = ({rating, name, setAuth, setName}) => {
                     maxDetail={'month'}
                     minDetail={'month'}
                 />
-                <RatingModal modalIsOpen={modalIsOpen} setIsOpen={setIsOpen} date={value} />
-            </div>
+                <RatingModal modalIsOpen={modalIsOpen} setIsOpen={setIsOpen} date={value} rating={rating} setRating={setRating} />
+            </div> }
         </>
     );
 }

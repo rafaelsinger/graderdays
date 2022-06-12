@@ -29,7 +29,7 @@ function App() {
       <Routes>
         <Route path='/login' element={<Login setAuth={setAuth} setName={setName} />} />
         <Route element={<ProtectedRoutes auth={auth} />}>
-          <Route path='/home' element={<Home name={name} rating={rating} setAuth={setAuth} setName={setName} />} />
+          <Route path='/home' element={<Home name={name} rating={rating} setRating={setRating} setAuth={setAuth} setName={setName} />} />
           <Route path='/dailyrating' element={<Rating name={name} rating={rating} setRating={setRating} />} />
         </Route>
         <Route path='*' element={<ErrorPage />} />

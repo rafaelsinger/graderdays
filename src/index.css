@@ -86,6 +86,12 @@ body {
   transform: translateY(-2px);
 }
 
+.in-modal{
+  width: 4.5rem;
+  padding: 0.4rem 0.8rem;
+  margin: 0 0.3rem;
+}
+
 .rating-text-enter {
   opacity: 0;
 }
@@ -153,6 +159,11 @@ body {
 
 .notesubmit:focus{
   outline-color: #1183ca; 
+}
+
+.notetext-modal{
+  width: 300px;
+  height: 300px;
 }
 
 .inner-rating-container{
@@ -282,12 +293,8 @@ abbr{
 .react-calendar__tile:enabled:hover,
 .react-calendar__tile:enabled:focus {
   background-color: #e6e6e6;
-  color: black;
 }
-/* .react-calendar__tile--now {
-  background: #ffff76;
-  background: brown;
-} */
+
 .react-calendar__tile--now:enabled:hover,
 .react-calendar__tile--now:enabled:focus {
   background-color: #e6e6e6;
@@ -558,4 +565,35 @@ abbr{
     width: 80%;
     height: 50%;
   }
+}
+
+/* LOADING SPINNER */
+
+@keyframes spinner {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+.loading-spinner {
+  width: 50px;
+  height: 50px;
+  border: 10px solid #f3f3f3; /* Light grey */
+  border-top: 10px solid #383636; /* Black */
+  border-radius: 50%;
+  animation: spinner 1.5s linear infinite;
+}
+
+.spinner-container{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: calc(100vh - 100px);
+}
+
+.button-container{
+  display: flex;
+   flex-wrap: wrap;
 }

@@ -40,7 +40,7 @@ const Rating = ({rating, name, setRating}) => {
                             <RatingButton name={'Awful'} color={'#A83030'} setRating={setRating} setActive={setActive} setSelected={setSelected} selected={selected} setDisplayBox={setDisplayBox} />
                             <RatingButton name={'Horrible'} color={'#7d0600'} setRating={setRating} setActive={setActive} setSelected={setSelected} selected={selected} setDisplayBox={setDisplayBox} />
                         </div>
-                        {displayBox && <Notebox rating={rating} setRating={setRating} />}
+                        {displayBox && <Notebox rating={rating} setRating={setRating} modal={false} />}
                     </div>
             </div>
         </div>

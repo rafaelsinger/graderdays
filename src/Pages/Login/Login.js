@@ -1,11 +1,11 @@
 import React from 'react'
-import { auth, db, provider } from '../../firebase-config'
-import {signInWithPopup, signInWithRedirect, getRedirectResult} from 'firebase/auth'
+import { auth, db, googleProvider} from '../../firebase-config'
+import {signInWithPopup, signInWithRedirect, getRedirectResult, GoogleAuthProvider } from 'firebase/auth'
 import { useNavigate } from 'react-router-dom';
+import firebase from 'firebase/compat/app';
 import { addDoc, collection, doc, setDoc } from 'firebase/firestore';
 
 function Login({setAuth, setName}) {
-
     let navigate = useNavigate();
 
     const signInWithGoogle = () => {
@@ -18,8 +18,11 @@ function Login({setAuth, setName}) {
         //     )
         //     return;
         // }
-        const result = signInWithPopup(auth, provider).then(() => {
+        const result = signInWithPopup(auth, googleProvider).then((result) => {
             // localStorage.setItem('isAuth', true);
+            const credential = GoogleAuthProvider.credentialFromResult(result);
+            const token = credential.accessToken;
+            console.log(token);
             setAuth(true);
             setName(auth.currentUser?.displayName.split(' ')[0]);
             const setNewUser = async () => {
@@ -31,6 +34,11 @@ function Login({setAuth, setName}) {
             setNewUser();
             //here would probably need to handle logic if they already did the rating
             navigate('/dailyrating');
+        }).catch((error) => {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            const credential = GoogleAuthProvider.credentialFromError(error);
+            console.log(credential);
         })
     };
 

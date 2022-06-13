@@ -5,7 +5,7 @@ import { auth, db } from '../../firebase-config';
 import { useNavigate } from 'react-router-dom';
 import Logout from './Logout';
 import RatingModal from './RatingModal';
-import { query, getDocs, collection, where, doc } from 'firebase/firestore';
+import { query, getDocs, getDoc, collection, where, doc } from 'firebase/firestore';
 import { onAuthStateChanged } from 'firebase/auth';
 import Loading from '../Loading';
 
@@ -13,6 +13,7 @@ const Home = ({rating, name, setAuth, setName, setRating}) => {
 
     const [allRatings, setAllRatings] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
+    const [refresh, setRefresh] = useState(false);
 
     useEffect(() => {
         setIsLoading(true);
@@ -22,6 +23,12 @@ const Home = ({rating, name, setAuth, setName, setRating}) => {
             } 
         })
     }, [])
+
+    // useEffect(() => {
+    //     console.log('this useeffect running')
+    //     setRefresh(false);
+    //     fetchData();
+    // }, [refresh])
 
 
     const fetchData = async (user) => {
@@ -133,7 +140,18 @@ const Home = ({rating, name, setAuth, setName, setRating}) => {
 
     function onChange(nextValue) {
         setValue(nextValue);
-        modalIsOpen ? setIsOpen(false) : setIsOpen(true); 
+        const date = nextValue.toDateString();
+
+        const inDatabase = async (date) => {
+            const q = await getDoc(doc(db, "users", auth.currentUser?.uid, "dailyratings", date));
+            if (q.data()) { 
+                //insert edit modal
+            } else {
+                modalIsOpen ? setIsOpen(false) : setIsOpen(true); 
+            }
+        }
+
+        inDatabase(date);
     }
   
     return (

@@ -1,12 +1,15 @@
-import React from 'react'
+import {React, useContext} from 'react'
 import { auth, db, googleProvider} from '../../firebase-config'
 import {signInWithPopup, signInWithRedirect, getRedirectResult, GoogleAuthProvider } from 'firebase/auth'
 import { useNavigate } from 'react-router-dom';
 import firebase from 'firebase/compat/app';
-import { addDoc, collection, doc, setDoc } from 'firebase/firestore';
+import { addDoc, collection, doc, setDoc, getDoc} from 'firebase/firestore';
+import { DayRatingContext } from '../../DayRatingContext';
 
 function Login({setAuth, setName}) {
     let navigate = useNavigate();
+
+    const setDidDayRating = useContext(DayRatingContext);
 
     const signInWithGoogle = () => {
         /** MOBILE LOGIN CURRENTLY DOES NOT WORK, NEED TO FIX THIS */
@@ -32,8 +35,22 @@ function Login({setAuth, setName}) {
                   });
             }
             setNewUser();
-            //here would probably need to handle logic if they already did the rating
-            navigate('/dailyrating');
+
+            /** LOGIC FOR HANDLING ROUTING IF THEY ALREADY DID THE RATING */
+            const curr = new Date().toDateString(); 
+            const inDatabase = async (date) => {
+                console.log(auth.currentUser.uid)
+                const q = await getDoc(doc(db, "users", auth.currentUser?.uid, "dailyratings", date));
+                console.log(q.data())
+                if (q.data()) { 
+                    setDidDayRating(true);
+                    navigate('/home')
+                } else {
+                    setDidDayRating(false);
+                    navigate('/dailyrating');
+                }
+            }
+            inDatabase(curr);
         }).catch((error) => {
             const errorCode = error.code;
             const errorMessage = error.message;

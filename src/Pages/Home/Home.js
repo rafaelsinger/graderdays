@@ -24,13 +24,6 @@ const Home = ({rating, name, setAuth, setName, setRating}) => {
         })
     }, [])
 
-    // useEffect(() => {
-    //     console.log('this useeffect running')
-    //     setRefresh(false);
-    //     fetchData();
-    // }, [refresh])
-
-
     const fetchData = async (user) => {
         try{
             const q = await getDocs(collection(db, "users", user.uid, "dailyratings"));
@@ -49,31 +42,7 @@ const Home = ({rating, name, setAuth, setName, setRating}) => {
             setIsLoading(false);
             console.error(err);
         }   
-        // const doc = await getDocs(q);
-        // const data = q.docs[0].data();
-        // console.log(data);
     }
-    // console.log(allRatings);
-
-
-    /*
-    *STRUCTURE OF THE RATING OBJECT FROM FIRESTORE:
-        rating:
-        color: "#006d05"
-        date: at {seconds: 1654846611, nanoseconds: 893000000}
-        note: "IT WAS AMAZING"
-        text: "amazing."
-    */
-
-    // console.log(allRatings);
-
-    // useEffect(() => {
-    //     if (allRatings.length === 0){ 
-    //         setAllRatings([rating])
-    //     } else if (!allRatings.includes(rating)) { 
-    //         setAllRatings(ratings => [...ratings, rating] )
-    //     }  
-    // }, [rating])
 
     const isSameDay = (rating, calendarDate) => {
         return differenceInCalendarDays(rating.rating.date?.toDate(), calendarDate) === 0;
@@ -86,55 +55,10 @@ const Home = ({rating, name, setAuth, setName, setRating}) => {
         }
     }
 
-    // const [ratings, setRatings] = useState([]);
-
-    // useEffect(() => {
-    //     const data = localStorage.getItem('ratings');
-    //     if (data){
-    //         const stringRatings = JSON.parse(data);
-    //         console.log('i should be setting to ', stringRatings)
-    //         setRatings(stringRatings);
-    //     }
-    // }, [])
-
-    // console.log(ratings)
-
-    // useEffect(() => {
-    //     if (ratings.length === 0){
-    //         setRatings([...ratings, rating])
-    //     } else if (ratings[ratings.length-1].date !== rating.date && rating.date !== null){
-    //         setRatings([...ratings, rating])
-    //     }
-    // }, [rating])
-
-
-    // useEffect(() => {
-    //     if (ratings.length > 0 && ratings[0].date !== null){
-    //         localStorage.setItem('ratings', JSON.stringify(ratings))
-    //     }
-    // }, [ratings])
-
-    // function tileClassName({ date }) {
-    //     // Check if a date React-Calendar wants to check is on the list of dates to add class to
-    //     console.log(date.getDay());
-    //     console.log(ratings[0])
-    //     // console.log(ratings[0].date)
-    //     const hasDate = ratings.hasOwnProperty(parseISO(date));
-    //     console.log(hasDate);
-    //     // const currRating = 
-    //     // if (ratings.find(dDate => isSameDay(dDate, date))) {
-    //     //     // const grade = dates.find(date => isSameDay(date, ratings));
-    //     //     // console.log(grade);
-    //     //     return 'testClass';
-    //     // }
-    // }
-
-    // function tileClassName({date}){
-    //     return;
-    // }
-
     const [value, setValue] = useState(new Date());
     const [modalIsOpen, setIsOpen] = useState(false);
+    const [viewModalIsOpen, setViewModalIsOpen] = useState(false);
+    const [passedData, setPassedData] = useState('');
 
     let navigate = useNavigate();
 
@@ -146,7 +70,11 @@ const Home = ({rating, name, setAuth, setName, setRating}) => {
             const q = await getDoc(doc(db, "users", auth.currentUser?.uid, "dailyratings", date));
             if (q.data()) { 
                 //insert edit modal
+                setPassedData(q.data());
+                modalIsOpen ? setIsOpen(false) : setIsOpen(true); 
+                // viewModalIsOpen ? setViewModalIsOpen(false) : setViewModalIsOpen(true)
             } else {
+                setPassedData(null);
                 modalIsOpen ? setIsOpen(false) : setIsOpen(true); 
             }
         }
@@ -170,7 +98,7 @@ const Home = ({rating, name, setAuth, setName, setRating}) => {
                     maxDetail={'month'}
                     minDetail={'month'}
                 />
-                <RatingModal modalIsOpen={modalIsOpen} setIsOpen={setIsOpen} date={value} rating={rating} setRating={setRating} />
+                <RatingModal modalIsOpen={modalIsOpen} setIsOpen={setIsOpen} date={value} data={passedData} setPassedData={setPassedData} rating={rating} setRating={setRating} />
             </div> }
         </>
     );

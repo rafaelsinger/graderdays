@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import RatingButton from './RatingButton'
 import Notebox from './Notebox'
 
-const Rating = ({rating, name, setRating}) => {
+const Rating = ({rating, name, setRating, setDidDayRating}) => {
     const [active, setActive] = useState(false);
     const [selected, setSelected] = useState(null);
     const [displayBox, setDisplayBox] = useState(false);
@@ -40,7 +40,7 @@ const Rating = ({rating, name, setRating}) => {
                             <RatingButton name={'Awful'} color={'#A83030'} setRating={setRating} setActive={setActive} setSelected={setSelected} selected={selected} setDisplayBox={setDisplayBox} />
                             <RatingButton name={'Horrible'} color={'#7d0600'} setRating={setRating} setActive={setActive} setSelected={setSelected} selected={selected} setDisplayBox={setDisplayBox} />
                         </div>
-                        {displayBox && <Notebox rating={rating} setRating={setRating} modal={false} />}
+                        {displayBox && <Notebox rating={rating} setRating={setRating} modal={false} setDidDayRating={setDidDayRating} />}
                     </div>
             </div>
         </div>

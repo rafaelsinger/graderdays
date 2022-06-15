@@ -15,7 +15,7 @@ function Logout({setAuth, setName}) {
     }
 
     return (
-        <button onClick={signUserOut}>sign out</button>
+        <button className='logout' onClick={signUserOut}></button>
     )
 }
 

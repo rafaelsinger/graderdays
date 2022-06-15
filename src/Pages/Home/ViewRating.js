@@ -34,10 +34,8 @@ const ViewRating = ({data, setPlaceholder, setPassedData}) => {
         <>
             <h2 style={{margin: '-0.5rem 0 1rem 0'}}>{displayRating}</h2>
             {note ? <textarea className='notetext notetext-modal' value={note} disabled></textarea> : <></>}
-            <div>
-                <button onClick={handleEdit} className={'footer-modal edit notesubmit'}>edit</button>
-                <button onClick={handleDelete} className={'footer-modal delete notesubmit'}>delete</button>
-            </div>
+            <button onClick={handleEdit} className={'footer-modal edit notesubmit'}>edit</button>
+            <button onClick={handleDelete} className={'footer-modal delete notesubmit'}>delete</button>
         </>
     )
 }

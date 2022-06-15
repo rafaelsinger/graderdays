@@ -8,6 +8,10 @@ const Rating = ({rating, name, setRating, setDidDayRating}) => {
     const [displayBox, setDisplayBox] = useState(false);
 
     useEffect(() => {
+        document.title = 'Daily Rating | Grader Days'
+    }, [])
+
+    useEffect(() => {
         if (selected){
             setTimeout(() => {
                 setDisplayBox(true);

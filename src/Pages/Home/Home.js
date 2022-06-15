@@ -16,6 +16,7 @@ const Home = ({rating, name, setAuth, setName, setRating}) => {
     const [refresh, setRefresh] = useState(false);
 
     useEffect(() => {
+        document.title = 'Home | Grader Days';
         setIsLoading(true);
         onAuthStateChanged(auth, (user) => {
             if (user){
@@ -36,7 +37,7 @@ const Home = ({rating, name, setAuth, setName, setRating}) => {
                 //     setAllRatings(ratings => [...ratings, doc.data()] )
                 // }  
             })
-            setIsLoading(false);
+            setIsLoading(false); //SHOULD BE FALSE
         } catch (err) {
             //eventually have proper error message page
             setIsLoading(false);
@@ -44,6 +45,17 @@ const Home = ({rating, name, setAuth, setName, setRating}) => {
         }   
     }
 
+    const getMonth = (date) => {
+        const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+        return monthNames[date.getMonth()]
+    }
+
+    const onActiveStartDateChange = (e) => {
+        setMonth(getMonth(e.activeStartDate));
+    }
+
+    const [month, setMonth] = useState(getMonth(new Date()));
+    
     const isSameDay = (rating, calendarDate) => {
         return differenceInCalendarDays(rating.rating.date?.toDate(), calendarDate) === 0;
     }
@@ -81,19 +93,16 @@ const Home = ({rating, name, setAuth, setName, setRating}) => {
 
         inDatabase(date);
     }
+
   
     return (
         <>
-            <div className='options-container'>
-                <Logout setAuth={setAuth} setName={setName} />
-                <div>profile</div>
-            </div>
-            
             {isLoading ? <Loading /> : <div className='calendar-container'>
-                <h3 className='dateTitle'>{name}'s Month</h3>
+                <h3 className='dateTitle'>{name}'s {month}</h3>
                 <Calendar
                     onChange={(e) => onChange(e)}
                     value={value}
+                    onActiveStartDateChange={e => onActiveStartDateChange(e)}
                     tileClassName={tileClassName}
                     maxDetail={'month'}
                     minDetail={'month'}

@@ -40,6 +40,7 @@ const RatingModal = ({modalIsOpen, setIsOpen, date, rating, setRating, data, set
     return (
         <Modal 
             className='rating-modal'
+            overlayClassName='rating-modal-overlay'
             closeTimeoutMS={200}
             isOpen={modalIsOpen}
             onRequestClose={closeModal}
@@ -51,7 +52,7 @@ const RatingModal = ({modalIsOpen, setIsOpen, date, rating, setRating, data, set
                 <h4 className='dateSubtitle' style={{width: '50%', textAlign: 'center', alignSelf: 'center'}}>{currentDate}</h4>
                 <div className={clicked ? 'hide' : 'button-container'}>
                     {data ? <ViewRating data={data} setPlaceholder={setPlaceholder} setPassedData={setPassedData} /> : <>
-                        <button className='option in-modal' style={{backgroundColor: '#006d05'}} onClick={e => handleButtonClick(e)}>Amazing</button>
+                        <button tabIndex='0' className='option in-modal' style={{backgroundColor: '#006d05'}} onClick={e => handleButtonClick(e)}>Amazing</button>
                         <button className='option in-modal' style={{backgroundColor: '#3d8532'}} onClick={e => handleButtonClick(e)}>Great</button>
                         <button className='option in-modal' style={{backgroundColor: '#88b77b'}} onClick={e => handleButtonClick(e)}>Good</button>
                         <button className='option in-modal' style={{backgroundColor: '#F9E076'}} onClick={e => handleButtonClick(e)}>Okay</button>

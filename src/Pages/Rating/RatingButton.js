@@ -34,8 +34,8 @@ const RatingButton = ({name, color, setRating, setActive, setSelected, selected}
     const mouseLeaveHandler = (e) => {
         if (!selected){
             setActive(false);
-            e.target.style.backgroundColor = 'white';
-            e.target.style.color = 'black'
+            e.target.style.backgroundColor = getComputedStyle(document.getElementsByClassName('option')[0]).getPropertyValue('--color-button');
+            e.target.style.color = getComputedStyle(document.getElementsByClassName('option')[0]).getPropertyValue('--color-text');
             e.target.style.fontWeight = ''
             setRating({text: '', color: null})         
         }

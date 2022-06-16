@@ -2,6 +2,32 @@
   box-sizing: border-box;
 }
 
+:root {
+  --color-background: #F8F0E3;
+  --color-background-secondary: #E3EBF8;
+  --color-background-third: #E3EBF8;
+  --color-text: #000000;
+  --color-text-alternate: #757575;
+  --theme-color-strong: #FFFFFF;
+  --color-background-highlight: #6F7378;
+  --color-background-opaque: rgba(248, 240, 227, 0.75);
+  --color-link: #0000EE;
+  --color-button: #FFFFFF;
+  --okay-color: #F9E076;
+}
+[data-theme='dark'] {
+  --color-background: #121212;
+  --color-background-secondary: #181818;
+  --color-background-third: #caced3;
+  --color-text: #FFFFFF;
+  --color-text-alternate: #FFFFFF;
+  --theme-color-strong: #000000;
+  --color-background-highlight: #e6e6e6;
+  --color-link: #A5C9FF;
+  --color-button: #121212;
+  --okay-color: #d3c404;
+}
+
 body {
   margin: 0;
   background-color: var(--color-background);
@@ -10,34 +36,20 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-:root {
-  --color-background: #F8F0E3;
-  --color-background-secondary: #E3EBF8;
-  --color-background-third: #E3EBF8;
-  --color-text: #000000;
-  --theme-color-strong: #FFFFFF;
-  --color-background-highlight: #6F7378;
-  --color-background-opaque: rgba(248, 240, 227, 0.75);
-  --color-link: #0000EE;
-}
-[data-theme='dark'] {
-  --color-background: #121212;
-  --color-background-secondary: #181818;
-  --color-background-third: #caced3;
-  --color-text: #FFFFFF;
-  --theme-color-strong: #000000;
-  --color-background-highlight: #e6e6e6;
-  --color-link: #A5C9FF;
-}
 
 .App{
   background-color: var(--color-background);
   color: var(--color-text)
 }
 
+button{
+  background-color: var(--color-button);
+  color: var(--color-text);
+}
+
 .attribution{
   position: absolute;
-  font-size: 0.75rem;
+  font-size: 1rem;
   right: 0;
   bottom: 0;
   /* height: 40px; */
@@ -52,10 +64,9 @@ body {
 
 .dateTitle{
   font-weight: 700;
-  font-size: 2rem;
+  font-size: 4rem;
   text-align: center;
-  margin: 0;
-  /* margin-top: 3rem; */ /*could fuck some shit */
+  margin: 0; 
   letter-spacing: 0.5px;
   padding-bottom: 7.5px;
   /* font-weight: 300;
@@ -65,7 +76,7 @@ body {
 .dateSubtitle{
   font-weight: 500;
   font-style: italic;
-  font-size: 1.5rem;
+  font-size: 3rem;
   margin: 0;
   padding-bottom: 10px;
   margin-bottom: 2rem;
@@ -74,7 +85,7 @@ body {
 }
 
 .rating-container{
-  width: 80%;
+  width: 100%;
   /* width: 60vh;
   height: 80vh; */
   display: flex;
@@ -86,7 +97,7 @@ body {
 
 .wrapper{
   display: flex;
-  height: calc(100vh - 45px);
+  height: calc(100vh - 60px);
   justify-content: center;
 }
 
@@ -97,6 +108,7 @@ body {
   justify-content: center;
   transition: all 0.5s;
   margin-bottom: 1rem;
+  font-size: 2rem;
 }
 
 .buttom-select-menu{
@@ -105,13 +117,15 @@ body {
 }
 
 .option{
-  width: 6rem;
+  width: 10rem;
+  font-size: 1.4rem;
   padding: 0.5rem 1.2rem;
-  margin: 0.3rem;
+  margin: 0.8rem;
   text-decoration:none;
   font-family: 'Inter';
   border: 0.8px solid gray;
-  background-color: white;
+  background-color: var(--color-button);
+  color: var(--color-text);
   border-radius: 4px;
   transition: all 0.2s;
   cursor: pointer;
@@ -186,21 +200,23 @@ body {
 
 .notetext{
   outline: 0px none transparent;
-  width: 400px;
-  height: 300px;
+  width: 700px;
+  height: 450px;
+  font-size: 1.4rem;
   resize: none;
-  background-color: var(--color-background-secondary);
+  background-color: var(--color-background-primary);
   color: var(--color-text);
 }
 
 .notesubmit{
-  width: 5rem;
+  width: 8rem;
+  font-size: 1.3rem;
   padding: 0.3rem 0.7rem;
   margin: 0.3rem;
   text-decoration: none;
   font-family: 'Inter';
   border: 0.8px solid gray;
-  background-color: white;
+  background-color: var(--color-button);
   border-radius: 4px;
   transition: all 0.2s;
   cursor: pointer;
@@ -220,7 +236,7 @@ body {
 }
 
 .notetext-modal{
-  width: 300px;
+  width: 500px;
   height: 250px;
 }
 
@@ -234,7 +250,7 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: calc(100vh - 45px);
+  height: calc(100vh - 60px);
 }
 
 .navbar{
@@ -242,7 +258,7 @@ body {
   display: flex;
   justify-content: space-between;
   width: 100%;
-  height:45px
+  height: 60px
 }
 
 .navbar > * {
@@ -254,8 +270,8 @@ body {
 .settings-nav{
   display: block;
   background-size: 35px 35px;
-  width: 35px;
-  height: 35px;
+  width: 50px;
+  height: 50px;
   background-repeat: no-repeat;
   background-position: center center;
   border: none;
@@ -274,7 +290,7 @@ body {
 .settings-nav{
   border-radius: 50%;
   background: url('/public/svgs/settings.svg');
-  background-size: 35px 35px;
+  background-size: 50px 50px;
   background-repeat: no-repeat;
   background-position: center center;
   background-color: var(--color-background-third);
@@ -282,7 +298,7 @@ body {
 
 .profile-nav{
   background: url('/public/svgs/profile.svg');
-  background-size: 37px;
+  background-size: 52px;
   background-repeat: no-repeat;
   background-position: center center;
   background-color: var(--color-background-third);
@@ -300,12 +316,12 @@ body {
 /* CALENDAR STYLES */
 
 .react-calendar {
-  width: 350px;
+  width: 800px;
   max-width: 100%;
-  background: var(--color-background-secondary);
   border: 1px solid #a0a096;
+  background-color: var(--color-button);
   font-family: 'Inter';
-  line-height: 1.125em;
+  /* line-height: 1.125em; */
 }
 .react-calendar--doubleView {
   width: 700px;
@@ -336,20 +352,23 @@ body {
 }
 .react-calendar__navigation {
   display: flex;
-  height: 44px;
+  height: 75px;
   margin-bottom: 1em;
 }
 
 .react-calendar__navigation__label:disabled{
   color: var(--color-text);
+  background-color: var(--color-background-secondary);
 }
 
 .react-calendar__navigation button {
   color: var(--color-text);
-  min-width: 44px;
+  background-color: var(--color-background-secondary);
+  font-size: 20px;
+  min-width: 70px;
 }
 .react-calendar__navigation button:disabled {
-  background-color: var(--theme-color-strong);
+  background-color: var(--color-background-secondary);
 }
 .react-calendar__navigation button:enabled:hover,
 .react-calendar__navigation button:enabled:focus {
@@ -368,6 +387,7 @@ abbr{
 }
 
 .react-calendar__month-view__weekdays__weekday {
+  font-size: 25px;
   padding-bottom: 0.4em;
 }
 .react-calendar__month-view__weekNumbers .react-calendar__tile {
@@ -391,7 +411,8 @@ abbr{
   padding: 10px 6.6667px;
   background: none;
   text-align: center;
-  line-height: 16px;
+  line-height: 70px;
+  font-size: 20px;
   color: var(--color-text)
 }
 
@@ -422,12 +443,12 @@ abbr{
 }
 .react-calendar__tile--active {
   background: var(--color-background-highlight);
-  color: var(--color-text);
+  color: var(--theme-color-strong);
 }
 .react-calendar__tile--active:enabled:hover,
 .react-calendar__tile--active:enabled:focus {
   background-color: var(--color-background-highlight);
-  /* color: var(--color-text) */
+  color: var(--theme-color-strong);
 }
 .react-calendar--selectRange .react-calendar__tile--hover {
   background-color: #e6e6e6;
@@ -478,7 +499,7 @@ abbr{
 }
 
 .okay{
-  background: #F9E076;
+  background: var(--okay-color);
 }
 
 .okay:enabled:hover,
@@ -530,19 +551,20 @@ abbr{
 .login-with-google-btn {
   cursor: pointer;
   transition: background-color 0.3s, box-shadow 0.3s;
-  padding: 5px 16px 12px 42px;
+  padding: 5px 16px 12px 50px;
   border: none;
   border-radius: 3px;
   box-shadow: 0 -1px 0 rgba(0, 0, 0, 0.04), 0 2px 1px rgba(0, 0, 0, 0.25);
-  color: #757575;
-  font-size: 25px;
+  color: var(--color-text-alternate);
+  font-size: 2rem;
   font-weight: 500;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
     Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
   background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTgiIGhlaWdodD0iMTgiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGcgZmlsbD0ibm9uZSIgZmlsbC1ydWxlPSJldmVub2RkIj48cGF0aCBkPSJNMTcuNiA5LjJsLS4xLTEuOEg5djMuNGg0LjhDMTMuNiAxMiAxMyAxMyAxMiAxMy42djIuMmgzYTguOCA4LjggMCAwIDAgMi42LTYuNnoiIGZpbGw9IiM0Mjg1RjQiIGZpbGwtcnVsZT0ibm9uemVybyIvPjxwYXRoIGQ9Ik05IDE4YzIuNCAwIDQuNS0uOCA2LTIuMmwtMy0yLjJhNS40IDUuNCAwIDAgMS04LTIuOUgxVjEzYTkgOSAwIDAgMCA4IDV6IiBmaWxsPSIjMzRBODUzIiBmaWxsLXJ1bGU9Im5vbnplcm8iLz48cGF0aCBkPSJNNCAxMC43YTUuNCA1LjQgMCAwIDEgMC0zLjRWNUgxYTkgOSAwIDAgMCAwIDhsMy0yLjN6IiBmaWxsPSIjRkJCQzA1IiBmaWxsLXJ1bGU9Im5vbnplcm8iLz48cGF0aCBkPSJNOSAzLjZjMS4zIDAgMi41LjQgMy40IDEuM0wxNSAyLjNBOSA5IDAgMCAwIDEgNWwzIDIuNGE1LjQgNS40IDAgMCAxIDUtMy43eiIgZmlsbD0iI0VBNDMzNSIgZmlsbC1ydWxlPSJub256ZXJvIi8+PHBhdGggZD0iTTAgMGgxOHYxOEgweiIvPjwvZz48L3N2Zz4=);
-  background-color: white;
+  background-color: var(--color-background-secondary);
+  background-size: 27px;
   background-repeat: no-repeat;
-  background-position: 12px 14.5px;
+  background-position: 14px 16px;
 }
 .login-with-google-btn:hover {
   box-shadow: 0 -1px 0 rgba(0, 0, 0, 0.04), 0 2px 4px rgba(0, 0, 0, 0.25),
@@ -565,7 +587,7 @@ abbr{
 
 .introSplash{
   text-align: center;
-  font-size: 7rem;
+  font-size: 14rem;
   margin: 0 0 0.5rem 0;
   background: #D66C65;
   background: linear-gradient(to right, #D66C65 20%, #E5D50F 40%, #88B77B 60%, #3D8532 80%, #006D05 100%);
@@ -576,7 +598,7 @@ abbr{
 .tagline{
   margin: 0 0 3rem;;
   font-weight: 300;
-  font-size: 1.2rem;
+  font-size: 2.4rem;
 }
 
 @keyframes fadein {
@@ -624,6 +646,10 @@ abbr{
   margin-right: auto; 
   width: 50%;
   height: 80%;
+}
+
+.rating-modal[data-theme='dark']{
+  background-color: black;
 }
 
 .rating-modal-overlay{
@@ -687,14 +713,6 @@ abbr{
   opacity: 1;
 }
 
-/* PHONE MEDIA QUERY */
-@media screen and (max-width: 700px) {
-  .rating-modal{
-    width: 80%;
-    height: 50%;
-  }
-}
-
 /* LOADING SPINNER */
 
 @keyframes spinner {
@@ -718,7 +736,7 @@ abbr{
   display: flex;
   align-items: center;
   justify-content: center;
-  height: calc(100vh - 45px);
+  height: calc(100vh - 60px);
 }
 
 .button-container{
@@ -751,7 +769,7 @@ abbr{
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: calc(100vh - 45px); 
+  height: calc(100vh - 60px); 
 }
 
 .profile-info,
@@ -767,4 +785,36 @@ abbr{
 
 .settings-info{
   width: 40%;
+}
+
+/* PHONE MEDIA QUERY */
+@media screen and (max-width: 700px) {
+  .rating-modal{
+    width: 80%;
+    height: 65%;
+    margin-top: auto;
+    margin-bottom: auto;
+  }
+  .notetext{
+    width: 250px;
+    height: 400px;
+  }
+  .notetext-modal{
+    width: 250px;
+    height: 290px;
+    margin-bottom: 2rem;
+  }
+  .rating-container{
+    width: 100%;
+  }
+  .attribution{
+    margin: 3px;
+  }
+}
+
+/* TABLET MEDIA QUERY */
+@media screen and (min-width: 750px) and (max-width: 1250px) {
+  .react-calendar{
+    font-size: 20px;
+  }
 }

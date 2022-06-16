@@ -1,6 +1,6 @@
 import {React, useContext, useEffect} from 'react'
 import { auth, db, googleProvider} from '../../firebase-config'
-import {signInWithPopup, signInWithRedirect, getRedirectResult, GoogleAuthProvider } from 'firebase/auth'
+import {signInWithPopup, signInWithRedirect, getRedirectResult, GoogleAuthProvider, setPersistence, browserSessionPersistence } from 'firebase/auth'
 import { useNavigate } from 'react-router-dom';
 import firebase from 'firebase/compat/app';
 import { addDoc, collection, doc, setDoc, getDoc} from 'firebase/firestore';
@@ -35,17 +35,14 @@ function Login({setAuth, setName}) {
         // }
         const result = signInWithPopup(auth, googleProvider).then((result) => {
             // localStorage.setItem('isAuth', true);
-            const credential = GoogleAuthProvider.credentialFromResult(result);
-            const token = credential.accessToken;
-            console.log(token);
+            // const credential = GoogleAuthProvider.credentialFromResult(result);
+            // const token = credential.accessToken;
             setNewUser();
 
             /** LOGIC FOR HANDLING ROUTING IF THEY ALREADY DID THE RATING */
             const curr = new Date().toDateString(); 
             const inDatabase = async (date) => {
-                console.log(auth.currentUser.uid)
                 const q = await getDoc(doc(db, "users", auth.currentUser?.uid, "dailyratings", date));
-                console.log(q.data())
                 if (q.data()) { 
                     setDidDayRating(true);
                     navigate('/home')
@@ -58,8 +55,8 @@ function Login({setAuth, setName}) {
         }).catch((error) => {
             const errorCode = error.code;
             const errorMessage = error.message;
-            const credential = GoogleAuthProvider.credentialFromError(error);
-            console.log(credential);
+            // const credential = GoogleAuthProvider.credentialFromError(error);
+            // console.log(credential);
         })
     };
 

@@ -30,8 +30,8 @@ const Rating = ({rating, name, setRating, setDidDayRating}) => {
 
     return (
         <div className='wrapper'>
-            <div className='rating-container' style={active?{border: `3px solid ${rating?.color}`}:{}} >
-                <h3 className='dateTitle'>{name}'s {currentDay}</h3>
+            <div className='rating-container' style={active?{border: `4px solid ${rating?.color}`}:{}} >
+                <h3 className='dateTitle' style={{marginTop: '-12rem'}}>{name}'s {currentDay}</h3>
                 <h4 className='dateSubtitle'>{currentDate}</h4> 
                 <div className='rating-box'>My day was<span style={{color: rating?.color}}>&nbsp;{rating?.text}</span></div>
                     <div className='inner-rating-container'>

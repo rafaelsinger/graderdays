@@ -1,9 +1,9 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import Modal from 'react-modal';
 import Notebox from '../Rating/Notebox'
 import ViewRating from './ViewRating'
 
-Modal.setAppElement('#root');
+Modal.setAppElement('#root'); //#root
 
 const RatingModal = ({modalIsOpen, setIsOpen, date, rating, setRating, data, setPassedData}) => {
 

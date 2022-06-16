@@ -28,15 +28,16 @@ function App() {
   /**
    * ! ALL TO DO'S SO FAR
    * *all authentication todos here
-   * TODO: fix authentication, create sessions that expire using the token that is created on login
    * TODO: fix mobile login with the redirect instead of popup
    * 
    * TODO: buy/create a logo - in progress
    * 
-   * TODO: fix modals in dark mode
+   * TODO: fix modals in dark mode - in progress (Stack Overflow)
    * TODO: build profile page showing total ratings, streaks, other interesting info
    * ...
-   * TODO: media queries, make sure it looks good on mobile and tablet
+   * TODO: bug - if you fill out day rating and then leave session on overnight, day-rate will still be true, meaning u can't fill out dailyrating!! (moment.js or day.js)?
+   * TODO: bug - when you click on the ratingbutton sometimes it just disappears
+   * TODO: media queries, make sure it looks good on mobile and tablet, also make sure looks good on desktop
     */
 
   //MAKE A USE AUTH HOOK AND USE FIREBASE

@@ -1,4 +1,5 @@
 import React, {useEffect} from 'react'
+import ThemeSwitch from './ThemeSwitch'
 
 export default function Settings({theme, setTheme}) {
 
@@ -15,8 +16,11 @@ export default function Settings({theme, setTheme}) {
   return (
     <div className='settings-container'>
         <div className='settings-info'>
-            <button onClick={switchTheme}>switch to {theme === 'light' ? 'dark' : 'light'} mode</button> 
-            {/* react toggle ^^ */}
+            <h1>Settings:</h1>
+            <div className='setting'>
+                <h2 className='setting-label'>Switch to {theme === 'light' ? 'dark' : 'light'} mode:</h2>
+                <ThemeSwitch switchTheme={switchTheme} />
+            </div>
         </div>
     </div>
   )

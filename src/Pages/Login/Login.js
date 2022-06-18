@@ -62,8 +62,9 @@ function Login({setAuth, setName}) {
 
     return (
     <div className='loginPage fadeIn'>
-        <h1 className='introSplash'>Grader Days</h1>
-        <h4 className='tagline'>Visualize your change.</h4>
+        <div className='login-logo'></div>
+        {/* <h1 className='introSplash'>Grader Days</h1>
+        <h4 className='tagline'>Visualize your change.</h4> */}
         <button className='login-with-google-btn' onClick={signInWithGoogle}>Sign in with Google</button>
     </div>
     )

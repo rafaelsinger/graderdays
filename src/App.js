@@ -21,8 +21,12 @@ function App() {
   const [name, setName] = useLocalStorage('name', '');
   const [didDayRating, setDidDayRating] = useLocalStorage('day-rate', false);
 
-  const defaultDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-  const [theme, setTheme] = useLocalStorage('theme', defaultDark ? 'dark' : 'light');
+  const defaultLight = window.matchMedia('(prefers-color-scheme: light)').matches;
+  const [theme, setTheme] = useLocalStorage('theme', defaultLight ? 'light' : 'dark');
+
+  useEffect(() => {
+    document.body.setAttribute('data-theme', theme);
+  }, [theme])
 
 
   /**
@@ -30,9 +34,6 @@ function App() {
    * *all authentication todos here
    * TODO: fix mobile login with the redirect instead of popup
    * 
-   * TODO: buy/create a logo - in progress
-   * 
-   * TODO: fix modals in dark mode - in progress (Stack Overflow)
    * TODO: build profile page showing total ratings, streaks, other interesting info
    * ...
    * TODO: bug - if you fill out day rating and then leave session on overnight, day-rate will still be true, meaning u can't fill out dailyrating!! (moment.js or day.js)?
@@ -43,11 +44,10 @@ function App() {
   //MAKE A USE AUTH HOOK AND USE FIREBASE
 
   return (
-    <div data-theme={theme} className='App'>
       <DayRatingContext.Provider value={setDidDayRating}>
         <Router>
           {auth && <nav className='navbar'>
-            <NavLink className='logo' to='/'>logo</NavLink>
+            <NavLink className='logo' to='/'></NavLink>
             <NavLink className='settings-nav' to='/settings'></NavLink>
             <NavLink className='profile-nav' to="/profile"></NavLink>
           </nav>}
@@ -65,7 +65,6 @@ function App() {
         </Router>
         <div className='attribution'>Made by <a className='attribution-link' href="https://rafaelsinger.com" target="_blank">Rafael Singer</a></div>
       </DayRatingContext.Provider>
-    </div>
   );
 }
 

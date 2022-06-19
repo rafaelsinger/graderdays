@@ -18,6 +18,9 @@ const Notebox = ({rating, setRating, modal, placeholder}) => {
                 rating: rating, 
             })
         if (modal.bool){
+            if (modal.date.toDateString() === (new Date).toDateString()){
+                setDidDayRating(true);
+            }
             modal.setIsOpen(false); 
             window.location.reload();
         } else {

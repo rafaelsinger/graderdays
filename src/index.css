@@ -185,7 +185,7 @@ button{
 }
 
 .option:hover{
-  transition: all 0.5s;
+  /* transition: all 0.5s; */
   transform: translateY(-2px);
 }
 
@@ -862,10 +862,20 @@ abbr{
   width: 20%;
 }
 
-/* .setting-label,
-.profile-feature-label{
-  margin-right: 2rem;
-} */
+.setting{
+  position: relative;
+  background-color: var(--color-background-secondary);
+  /* border-bottom: 1.5px var(--color-background-highlight) solid;
+  border-width: 85%; */
+}
+.setting::after{
+  position: absolute;
+  content: '';
+  bottom: 0;
+  left: 10%;
+  width: 80%;
+  border-bottom: 1.5px var(--color-background-highlight) solid;
+}
 
 /* PHONE MEDIA QUERY */
 @media screen and (max-width: 700px) {
@@ -963,8 +973,30 @@ abbr{
       width: 85%;
       height: 85%;
   }
+  .setting-label{
+    font-size: 1rem;
+    margin: 1rem;
+  }
+  .setting{
+    position: relative;
+    background-color: var(--color-background-secondary);
+    /* border-bottom: 1.5px var(--color-background-highlight) solid;
+    border-width: 85%; */
+  }
+  .setting::after{
+    position: absolute;
+    content: '';
+    bottom: 0;
+    left: 10%;
+    width: 80%;
+    border-bottom: 1.5px var(--color-background-highlight) solid;
+  }
   .profile-feature:last-of-type{
     width: 50%;
+  }
+  .darkModeToggle[style]{
+    margin-right: -1rem;
+    width: 100px !important;
   }
 }
 

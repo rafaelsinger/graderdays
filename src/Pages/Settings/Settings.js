@@ -17,10 +17,25 @@ export default function Settings({theme, setTheme}) {
     <div className='settings-container'>
         <div className='settings-info'>
             <h1>Settings:</h1>
-            <div className='setting'>
-                <h2 className='setting-label'>Switch to {theme === 'light' ? 'dark' : 'light'} mode:</h2>
-                <ThemeSwitch switchTheme={switchTheme} />
-            </div>
+                <div className='setting'>
+                    <h2 className='setting-label'>Switch to {theme === 'light' ? 'dark' : 'light'} mode:</h2>
+                    <ThemeSwitch switchTheme={switchTheme} />
+                </div>
+                <div className='setting'>
+                    <h2 className='setting-label'>-setting</h2>
+                </div>
+                <div className='setting'>
+                    <h2 className='setting-label'>-setting</h2>
+                </div>
+                <div className='setting'>
+                    <h2 className='setting-label'>-setting</h2>
+                </div>
+                <div className='setting'>
+                    <h2 className='setting-label'>-setting</h2>
+                </div>
+                <div className='setting'>
+                    <h2 className='setting-label'>-setting</h2>
+                </div>
         </div>
     </div>
   )

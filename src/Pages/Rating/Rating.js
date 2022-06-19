@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo, useContext} from 'react';
 import RatingButton from './RatingButton'
 import Notebox from './Notebox'
+import { DayRatingContext } from '../../DayRatingContext';
 
-const Rating = ({rating, name, setRating, setDidDayRating}) => {
+const Rating = ({rating, name, setRating}) => {
     const [active, setActive] = useState(false);
     const [selected, setSelected] = useState(null);
     const [displayBox, setDisplayBox] = useState(false);
@@ -28,6 +29,14 @@ const Rating = ({rating, name, setRating, setDidDayRating}) => {
     currentDate[1] = currentDate[1] + ','
     currentDate = currentDate.join(' ');
 
+    const setDidDayRating = useContext(DayRatingContext)
+
+
+    /** resets day rating when day changes*/
+    useMemo(() => {
+        setDidDayRating(false);
+    }, [currentDay])
+
     return (
         <div className='wrapper'>
             <div className='rating-container' style={active?{border: `4px solid ${rating?.color}`}:{}} >
@@ -44,7 +53,7 @@ const Rating = ({rating, name, setRating, setDidDayRating}) => {
                             <RatingButton name={'Awful'} color={'#A83030'} setRating={setRating} setActive={setActive} setSelected={setSelected} selected={selected} setDisplayBox={setDisplayBox} />
                             <RatingButton name={'Horrible'} color={'#7d0600'} setRating={setRating} setActive={setActive} setSelected={setSelected} selected={selected} setDisplayBox={setDisplayBox} />
                         </div>
-                        {displayBox && <Notebox rating={rating} setRating={setRating} modal={false} setDidDayRating={setDidDayRating} />}
+                        {displayBox && <Notebox rating={rating} setRating={setRating} modal={false} />}
                     </div>
             </div>
         </div>

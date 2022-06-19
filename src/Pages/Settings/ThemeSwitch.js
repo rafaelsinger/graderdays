@@ -13,9 +13,10 @@ const ThemeSwitch = ({switchTheme}) => {
         <DarkModeToggle 
             onChange={handleChange}
             checked={isDarkMode}
-            size={80}
+            size={75}
             style={{width: '85px'}}
             speed={2}
+            className={'darkModeToggle'}
         />
     )
 }

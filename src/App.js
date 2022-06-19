@@ -34,10 +34,9 @@ function App() {
    * *all authentication todos here
    * TODO: fix mobile login with the redirect instead of popup
    * 
-   * TODO: build profile page showing total ratings, streaks, other interesting info
+   * TODO: build profile page with interesting functionality - graphs? streaks?
+   * TODO: potentially look into adding more settings? maybe a disclaimer lol
    * ...
-   * TODO: bug - if you fill out day rating and then leave session on overnight, day-rate will still be true, meaning u can't fill out dailyrating!! (moment.js or day.js)?
-   * TODO: bug - when you click on the ratingbutton sometimes it just disappears
    * TODO: media queries, make sure it looks good on mobile and tablet, also make sure looks good on desktop
     */
 

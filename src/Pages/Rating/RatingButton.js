@@ -13,7 +13,6 @@ const RatingButton = ({name, color, setRating, setActive, setSelected, selected}
         if (!selected){
             setSelected(true);
             highlight(e);
-            // e.target.hidden = true;
         }
     }
 
@@ -27,7 +26,7 @@ const RatingButton = ({name, color, setRating, setActive, setSelected, selected}
     const mouseOverHandler = (e) => {
         if (!selected){
             highlight(e);
-            setRating({text: `${name.toLowerCase()}.`, color: color, date: new Date()});
+            setRating({text: `${name.toLowerCase()}.`, color: color, date: new Date()}); //maybe have setTimeout(() => {}, 50)?
         }
     }
     

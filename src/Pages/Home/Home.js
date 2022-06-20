@@ -8,12 +8,13 @@ import RatingModal from './RatingModal';
 import { query, getDocs, getDoc, collection, where, doc } from 'firebase/firestore';
 import { onAuthStateChanged } from 'firebase/auth';
 import Loading from '../Loading';
+import { useLocalStorage } from '../../useLocalStorage';
 
 const Home = ({rating, name, setAuth, setName, setRating}) => {
 
     const [allRatings, setAllRatings] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
-    const [refresh, setRefresh] = useState(false);
+    const [refresh, setRefresh] = useState(false);    
 
     useEffect(() => {
         document.title = 'Home | Grader Days';
@@ -63,6 +64,18 @@ const Home = ({rating, name, setAuth, setName, setRating}) => {
     const tileClassName = ({date}) => {
         const foundRating = allRatings.find(rating => isSameDay(rating, date));
         if (foundRating){
+            //logic for longest good streak
+            // let rating = foundRating.rating.text;
+            // console.log(foundRating);
+            // if (rating === 'good.' || rating === 'great.' || rating === 'amazing.'){
+            //     setCurrGoodStreak(prevStreak => prevStreak + 1)
+            //     console.log(currGoodStreak);
+            // } else {
+            //     if (currGoodStreak >= longestGoodStreak.streak){
+            //         setLongestGoodStreak({streak: currGoodStreak}); 
+            //     }
+            //     setCurrGoodStreak(0);
+            // }
             return `${foundRating.rating.text.replace('.','')} rating`
         }
     }

@@ -37,7 +37,11 @@ function App() {
    * TODO: build profile page with interesting functionality - graphs? streaks?
    * TODO: potentially look into adding more settings? maybe a disclaimer lol
    * ...
+   * !POTENTIAL IMPORTANT ERROR: localStorage vs. storing in database, make sure website works across browsers and devices (even when clearing cookies)
    * TODO: media queries, make sure it looks good on mobile and tablet, also make sure looks good on desktop
+   * 
+   * TODO BEFORE V1 LAUNCH:
+   *  - go through each type of device and make sure it at least looks okay (media queries) 
     */
 
   //MAKE A USE AUTH HOOK AND USE FIREBASE

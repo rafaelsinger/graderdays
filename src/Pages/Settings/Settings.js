@@ -21,21 +21,9 @@ export default function Settings({theme, setTheme}) {
                     <h2 className='setting-label'>Switch to {theme === 'light' ? 'dark' : 'light'} mode:</h2>
                     <ThemeSwitch switchTheme={switchTheme} />
                 </div>
-                <div className='setting'>
+                {/* <div className='setting'>
                     <h2 className='setting-label'>-setting</h2>
-                </div>
-                <div className='setting'>
-                    <h2 className='setting-label'>-setting</h2>
-                </div>
-                <div className='setting'>
-                    <h2 className='setting-label'>-setting</h2>
-                </div>
-                <div className='setting'>
-                    <h2 className='setting-label'>-setting</h2>
-                </div>
-                <div className='setting'>
-                    <h2 className='setting-label'>-setting</h2>
-                </div>
+                </div> */}
         </div>
     </div>
   )

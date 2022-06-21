@@ -3,7 +3,7 @@ import Modal from 'react-modal';
 import Notebox from '../Rating/Notebox'
 import ViewRating from './ViewRating'
 
-Modal.setAppElement('#root'); //#root
+Modal.setAppElement('#root'); 
 
 const RatingModal = ({modalIsOpen, setIsOpen, date, rating, setRating, data, setPassedData}) => {
 
@@ -33,7 +33,11 @@ const RatingModal = ({modalIsOpen, setIsOpen, date, rating, setRating, data, set
 
     const handleButtonClick = (e) => {
         const text = `${e.target.textContent.toLowerCase()}.`
-        setRating({text: text, date: date});
+        if (placeholder){
+            setRating({text: text, date: date, note: placeholder}); 
+        } else {
+            setRating({text: text, date: date, note: ''});
+        }
         setClicked(true);
     }
 
@@ -51,8 +55,8 @@ const RatingModal = ({modalIsOpen, setIsOpen, date, rating, setRating, data, set
                 <h2 className='dateTitle' style={{margin: 0}}>{currentDay}</h2>
                 <h4 className='dateSubtitle' style={{width: '50%', textAlign: 'center', alignSelf: 'center'}}>{currentDate}</h4>
                 <div className={clicked ? 'hide' : 'button-container'}>
-                    {data ? <ViewRating data={data} setPlaceholder={setPlaceholder} setPassedData={setPassedData} /> : <>
-                        <button tabIndex='0' className='option in-modal' style={{backgroundColor: '#006d05'}} onClick={e => handleButtonClick(e)}>Amazing</button>
+                    {data ? <ViewRating data={data} setPlaceholder={setPlaceholder} placeholder={placeholder} setPassedData={setPassedData} /> : <>
+                        <button className='option in-modal' style={{backgroundColor: '#006d05'}} onClick={e => handleButtonClick(e)}>Amazing</button>
                         <button className='option in-modal' style={{backgroundColor: '#3d8532'}} onClick={e => handleButtonClick(e)}>Great</button>
                         <button className='option in-modal' style={{backgroundColor: '#88b77b'}} onClick={e => handleButtonClick(e)}>Good</button>
                         <button className='option in-modal' style={{backgroundColor: '#F9E076'}} onClick={e => handleButtonClick(e)}>Okay</button>
@@ -62,7 +66,7 @@ const RatingModal = ({modalIsOpen, setIsOpen, date, rating, setRating, data, set
                     </>}
                 </div>
                 <div className={clicked ? 'show' : 'hide'}>
-                    <Notebox rating={rating} setRating={setRating} modal={{date: date, bool: true, setIsOpen: setIsOpen}} placeholder={placeholder} />
+                    <Notebox rating={rating} setRating={setRating} modal={{date: date, bool: true, note: placeholder, setIsOpen: setIsOpen}} placeholder={placeholder} />
                 </div>
             </div>
         </Modal>

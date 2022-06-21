@@ -31,20 +31,19 @@ function App() {
 
   /**
    * ! ALL TO DO'S SO FAR
+   * 
    * *all authentication todos here
    * TODO: fix mobile login with the redirect instead of popup
    * 
    * TODO: build profile page with interesting functionality - graphs? streaks?
    * TODO: potentially look into adding more settings? maybe a disclaimer lol
+   * 
+   * TODO: TWO NEW BUGS TO FIX
+   * ! NETLIFY REDIRECTS GET CAUGHT IN INFINITE LOOP WHEN TRYING TO NAVIGATE TO /home
+   * 
    * ...
    * !POTENTIAL IMPORTANT ERROR: localStorage vs. storing in database, make sure website works across browsers and devices (even when clearing cookies)
-   * TODO: media queries, make sure it looks good on mobile and tablet, also make sure looks good on desktop
-   * 
-   * TODO BEFORE V1 LAUNCH:
-   *  - go through each type of device and make sure it at least looks okay (media queries) 
     */
-
-  //MAKE A USE AUTH HOOK AND USE FIREBASE
 
   return (
       <DayRatingContext.Provider value={setDidDayRating}>
@@ -63,7 +62,8 @@ function App() {
                 <Route path='/profile' element={<Profile setAuth={setAuth} setName={setName} name={name} />} />
                 <Route path='/settings' element={<Settings setTheme={setTheme} theme={theme} />} />
               </Route>
-              <Route path='*' element={<ErrorPage />} />
+              <Route path='*' element={<Navigate to='/error404' />} />
+              <Route path='/error404' element={<ErrorPage />} />
           </Routes>
         </Router>
         <div className='attribution'>Made by <a className='attribution-link' href="https://rafaelsinger.com" target="_blank">Rafael Singer</a></div>

@@ -10,14 +10,11 @@ export default function Profile({setAuth, setName, name}) {
     const [totalRatings, setTotalRatings] = useLocalStorage('totalRatings', 0);
     const [goodStreak, setGoodStreak] = useLocalStorage('goodStreak', {});
     
-    // const [longestGoodStreak, setLongestGoodStreak] = useLocalStorage('goodStreak', {streak: 0});
-    // const [g, setCurrGoodStreak] = useState(0); 
-    // const [maxGoodStreak, setMaxGoodStreak] = useState(0);
-    const [currDay, setCurrDay] = useState((new Date).getDay());
+    // const [currDay, setCurrDay] = useState((new Date).getDay()); //if it becomes too computionally expensive, useMemo w/ this
 
     useEffect(() => {
         document.title = 'Profile | Grader Days'
-        setCurrDay(new Date((new Date).getDay()));
+        // setCurrDay(new Date((new Date).getDay()));
         onAuthStateChanged(auth, () => {
           getNumberOfRatings();
           getLongestGoodStreak();

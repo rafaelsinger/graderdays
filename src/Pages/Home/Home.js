@@ -30,17 +30,10 @@ const Home = ({rating, name, setAuth, setName, setRating}) => {
         try{
             const q = await getDocs(collection(db, "users", user.uid, "dailyratings"));
             q.forEach((doc) => {
-                // if (allRatings.length === 0 && !allRatings.includes(doc.data())){ 
                 setAllRatings((ratings) => [...ratings, doc.data()]) 
-                // }
-                //     setAllRatings([doc.data()])
-                // } else if (!allRatings.includes(doc.data().date)){ 
-                //     setAllRatings(ratings => [...ratings, doc.data()] )
-                // }  
             })
             setIsLoading(false); //SHOULD BE FALSE
         } catch (err) {
-            //eventually have proper error message page
             setIsLoading(false);
             console.error(err);
         }   
@@ -64,18 +57,6 @@ const Home = ({rating, name, setAuth, setName, setRating}) => {
     const tileClassName = ({date}) => {
         const foundRating = allRatings.find(rating => isSameDay(rating, date));
         if (foundRating){
-            //logic for longest good streak
-            // let rating = foundRating.rating.text;
-            // console.log(foundRating);
-            // if (rating === 'good.' || rating === 'great.' || rating === 'amazing.'){
-            //     setCurrGoodStreak(prevStreak => prevStreak + 1)
-            //     console.log(currGoodStreak);
-            // } else {
-            //     if (currGoodStreak >= longestGoodStreak.streak){
-            //         setLongestGoodStreak({streak: currGoodStreak}); 
-            //     }
-            //     setCurrGoodStreak(0);
-            // }
             return `${foundRating.rating.text.replace('.','')} rating`
         }
     }
@@ -85,8 +66,6 @@ const Home = ({rating, name, setAuth, setName, setRating}) => {
     const [viewModalIsOpen, setViewModalIsOpen] = useState(false);
     const [passedData, setPassedData] = useState('');
 
-    let navigate = useNavigate();
-
     function onChange(nextValue) {
         setValue(nextValue);
         const date = nextValue.toDateString();
@@ -94,10 +73,8 @@ const Home = ({rating, name, setAuth, setName, setRating}) => {
         const inDatabase = async (date) => {
             const q = await getDoc(doc(db, "users", auth.currentUser?.uid, "dailyratings", date));
             if (q.data()) { 
-                //insert edit modal
                 setPassedData(q.data());
                 modalIsOpen ? setIsOpen(false) : setIsOpen(true); 
-                // viewModalIsOpen ? setViewModalIsOpen(false) : setViewModalIsOpen(true)
             } else {
                 setPassedData(null);
                 modalIsOpen ? setIsOpen(false) : setIsOpen(true); 

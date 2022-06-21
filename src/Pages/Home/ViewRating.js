@@ -2,11 +2,13 @@ import React, { useContext } from 'react';
 import { auth, db } from '../../firebase-config';
 import { deleteDoc, doc} from 'firebase/firestore';
 import { DayRatingContext } from '../../DayRatingContext';
+import { useNavigate } from 'react-router-dom';
 
-const ViewRating = ({data, setPlaceholder, setPassedData}) => {
+const ViewRating = ({data, setPlaceholder, setPassedData, placeholder}) => {
 
     const date = data.rating?.date.toDate();
     const setDidDayRating = useContext(DayRatingContext);
+    let navigate = useNavigate();
 
     const rating = `${data.rating?.text.replace('.','')}`
     let displayRating = `A ${rating} day.`
@@ -28,11 +30,12 @@ const ViewRating = ({data, setPlaceholder, setPassedData}) => {
             setDidDayRating(false);
         }
         window.location.reload();
+        navigate('/home');
     }
 
     return (
         <>
-            <h2 style={{margin: '-0.5rem 0 1rem 0'}}>{displayRating}</h2>
+            <h2 className='displayRating'>{displayRating}</h2>
             {note ? <textarea className='notetext notetext-modal' value={note} disabled></textarea> : <></>}
             <button onClick={handleEdit} className={'footer-modal edit notesubmit'}>edit</button>
             <button onClick={handleDelete} className={'footer-modal delete notesubmit'}>delete</button>

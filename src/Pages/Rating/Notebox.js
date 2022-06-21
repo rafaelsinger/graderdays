@@ -1,5 +1,5 @@
 import { doc, setDoc } from 'firebase/firestore';
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { DayRatingContext } from '../../DayRatingContext';
 import { db, auth } from '../../firebase-config';
@@ -16,7 +16,7 @@ const Notebox = ({rating, setRating, modal, placeholder}) => {
         }
         await setDoc(doc(db, "users", auth.currentUser.uid, "dailyratings", date), {
                 rating: rating, 
-            })
+        })
         if (modal.bool){
             if (modal.date.toDateString() === (new Date).toDateString()){
                 setDidDayRating(true);
@@ -29,9 +29,13 @@ const Notebox = ({rating, setRating, modal, placeholder}) => {
         }
     }
 
+    const handleSetRating = (e) => {
+        setRating({...rating, note: e.target.value});
+    }
+
     return (
         <div className='notebox'>
-            <textarea className={modal.bool ? 'notetext notetext-modal' : 'notetext'} defaultValue={placeholder} onChange={(e) => setRating({...rating, note: e.target.value}) } style={{border: 'none'}} placeholder="Leave a note about your day." autoFocus></textarea>
+            <textarea className={modal.bool ? 'notetext notetext-modal' : 'notetext'} defaultValue={placeholder} onChange={(e) => handleSetRating(e)} style={{border: 'none'}} placeholder="Leave a note about your day." autoFocus></textarea>
             <button type="submit" className='notesubmit' onClick={addRating}>submit</button>
         </div>
     )

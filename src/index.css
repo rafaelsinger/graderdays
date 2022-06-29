@@ -46,12 +46,26 @@
 }
 
 body {
+  min-height: 100vh;
+  min-height: -webkit-fill-available;
   margin: 0;
   background-color: var(--color-background);
   color: var(--color-text);
   font-family: 'Inter', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+html{
+  height: -webkit-fill-available;
+  height: calc(var(--vh, 1vh) * 100);
+}
+
+.page-wrap{
+  height: calc((var(--vh) * 100));
+  max-height: -webkit-fill-available;
+  display: flex;
+  flex-direction: column;
 }
 
 
@@ -66,10 +80,12 @@ button{
 }
 
 .attribution{
-  position: absolute;
+  /* position: absolute;
   font-size: 1rem;
   right: 0;
-  bottom: 0;
+  bottom: 0; */
+  margin-top: auto;
+  margin-left: auto;
 }
 
 .attribution-link{
@@ -85,9 +101,9 @@ button{
   padding-bottom: 7.5px;
 }
 
-.dateTitleRating{
+/* .dateTitleRating{
   margin-top: -12rem;
-}
+} */
 
 .dateSubtitle{
   font-weight: 500;
@@ -108,6 +124,8 @@ button{
 .modal-content-container .dateSubtitle{
   font-size: 2rem;
   margin-bottom: 2rem;
+  text-align: center;
+  align-self: center;
 }
 
 .option.in-modal{
@@ -134,8 +152,16 @@ button{
 
 .wrapper{
   display: flex;
-  height: calc(100vh - 60px);
+  /* height: calc( var(--vh) * 100);
+  height: calc(100vh - 60px); */
+  /* height: calc((var(--vh) * 100) - 60px);
+  height: calc((var(--vh) * 10)); */
+  /* height: calc(100% - 60px); */
+  /* height: calc((var(--vh) * 100)); */
+  /* max-height: -webkit-fill-available; */
+  /* max-height: calc((var(--vh) * 100) - 60px); */
   justify-content: center;
+  flex-grow: 1;
 }
 
 .rating-box{
@@ -279,7 +305,7 @@ button{
 
 .inner-rating-container{
   width: auto;
-  height: 300px;
+  /* height: 300px; */
 }
 
 .calendar-container{
@@ -288,6 +314,7 @@ button{
   justify-content: center;
   align-items: center;
   height: calc(100vh - 60px);
+  max-height: -webkit-fill-available;
 }
 
 .navbar{
@@ -582,6 +609,7 @@ abbr{
   display: flex;
   flex-direction: column;
   height: 100vh;
+  max-height: -webkit-fill-available;
   align-items: center;
   justify-content: center;
   -webkit-animation: fadein 2s; /* Safari, Chrome and Opera > 12.1 */
@@ -610,6 +638,7 @@ abbr{
   background-repeat: no-repeat;
   background-position: 14px 16px;
 }
+
 .login-with-google-btn:hover {
   box-shadow: 0 -1px 0 rgba(0, 0, 0, 0.04), 0 2px 4px rgba(0, 0, 0, 0.25),
   0 0 0 3px #c8dafc;
@@ -792,6 +821,7 @@ abbr{
   align-items: center;
   justify-content: center;
   height: calc(100vh - 60px);
+  max-height: -webkit-fill-available
 }
 
 .button-container{
@@ -825,7 +855,9 @@ abbr{
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: calc(100vh - 60px); 
+  /* height: calc(100vh - 60px);  */
+  flex: 1;
+  max-height: -webkit-fill-available;
 }
 
 .profile-info,
@@ -913,14 +945,19 @@ abbr{
   .dateTitle{
     font-size: 2.5rem;
   }
-  .dateTitleRating{
+  .modal-content-container .dateTitle {
+    font-size: 3rem;
+    text-align: center;
+}
+  /* .dateTitleRating{
     max-width: 85%;
-  }
+  } */
   .dateSubtitle{
     font-size: 2rem;
   }
   .dateTitleRating + .dateSubtitle{
     max-width: 85%;
+    margin-bottom: 1rem;
   }
   .logo{
     background: var(--mobile-home-logo);
@@ -975,9 +1012,9 @@ abbr{
     margin-bottom: 2rem;
     font-size: 1.15rem;
   }
-  .attribution{
+  /* .attribution{
     margin: 3px;
-  }
+  } */
   .settings-info,
   .profile-info{
       width: 85%;

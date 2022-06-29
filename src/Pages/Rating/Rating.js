@@ -10,13 +10,14 @@ const Rating = ({rating, name, setRating}) => {
 
     useEffect(() => {
         document.title = 'Daily Rating | Grader Days'
+        // document.querySelector('.attribution').className += ' hide'
     }, [])
 
     useEffect(() => {
         if (selected){
             setTimeout(() => {
                 setDisplayBox(true);
-            }, 550)
+            }, 400)
         }
     }, [selected])
 

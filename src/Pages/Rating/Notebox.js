@@ -24,6 +24,7 @@ const Notebox = ({rating, setRating, modal, placeholder}) => {
             modal.setIsOpen(false); 
             window.location.reload();
         } else {
+            // document.querySelector('.attribution').classList.remove('hide');
             setDidDayRating(true);
             navigate('/home')
         }

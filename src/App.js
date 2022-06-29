@@ -17,7 +17,7 @@ import { DayRatingContext } from './DayRatingContext';
 function App() {
   const [value, onChange] = useState(new Date());
   const [rating, setRating] = useState(null); 
-  const [auth, setAuth] = useLocalStorage('auth', false);
+  const [auth, setAuth] = useLocalStorage('auth', true); //! SET BACK TO FALSE
   const [name, setName] = useLocalStorage('name', '');
   const [didDayRating, setDidDayRating] = useLocalStorage('day-rate', false);
 
@@ -47,26 +47,28 @@ function App() {
 
   return (
       <DayRatingContext.Provider value={setDidDayRating}>
-        <Router>
-          {auth && <nav className='navbar'>
-            <NavLink className='logo' to='/'></NavLink>
-            <NavLink className='settings-nav' to='/settings'></NavLink>
-            <NavLink className='profile-nav' to="/profile"></NavLink>
-          </nav>}
-          <Routes>
-              <Route path='/' element={auth ? <Navigate to="/dailyrating" /> : <Navigate to='/login' />} />
-              <Route path='/login' element={auth ? <Navigate to='/dailyrating' /> : <Login setAuth={setAuth} setName={setName} />} />
-              <Route element={<ProtectedRoutes auth={auth} />}>
-                <Route path='/home' element={<Home name={name} rating={rating} setRating={setRating} setAuth={setAuth} setName={setName} />} />
-                <Route path='/dailyrating' element={didDayRating ? <Navigate to="/home" /> : <Rating name={name} rating={rating} setRating={setRating} />} />
-                <Route path='/profile' element={<Profile setAuth={setAuth} setName={setName} name={name} />} />
-                <Route path='/settings' element={<Settings setTheme={setTheme} theme={theme} />} />
-              </Route>
-              <Route path='*' element={<Navigate to='/error404' />} />
-              <Route path='/error404' element={<ErrorPage />} />
-          </Routes>
-        </Router>
-        <div className='attribution'>Made by <a className='attribution-link' href="https://rafaelsinger.com" target="_blank">Rafael Singer</a></div>
+        <div class='page-wrap'>
+          <Router>
+            {auth && <nav className='navbar'>
+              <NavLink className='logo' to='/'></NavLink>
+              <NavLink className='settings-nav' to='/settings'></NavLink>
+              <NavLink className='profile-nav' to="/profile"></NavLink>
+            </nav>}
+            <Routes>
+                <Route path='/' element={auth ? <Navigate to="/dailyrating" /> : <Navigate to='/login' />} />
+                <Route path='/login' element={auth ? <Navigate to='/dailyrating' /> : <Login setAuth={setAuth} setName={setName} />} />
+                <Route element={<ProtectedRoutes auth={auth} />}>
+                  <Route path='/home' element={<Home name={name} rating={rating} setRating={setRating} setAuth={setAuth} setName={setName} />} />
+                  <Route path='/dailyrating' element={didDayRating ? <Navigate to="/home" /> : <Rating name={name} rating={rating} setRating={setRating} />} />
+                  <Route path='/profile' element={<Profile setAuth={setAuth} setName={setName} name={name} />} />
+                  <Route path='/settings' element={<Settings setTheme={setTheme} theme={theme} />} />
+                </Route>
+                <Route path='*' element={<Navigate to='/error404' />} />
+                <Route path='/error404' element={<ErrorPage />} />
+            </Routes>
+          </Router>
+          <div className='attribution'>Made by <a className='attribution-link' href="https://rafaelsinger.com" target="_blank">Rafael Singer</a></div>
+        </div>
       </DayRatingContext.Provider>
   );
 }

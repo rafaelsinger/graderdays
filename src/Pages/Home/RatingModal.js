@@ -53,7 +53,7 @@ const RatingModal = ({modalIsOpen, setIsOpen, date, rating, setRating, data, set
             <div className='modal-content-container'>
                 <button className='close' onClick={closeModal}></button>
                 <h2 className='dateTitle' style={{margin: 0}}>{currentDay}</h2>
-                <h4 className='dateSubtitle' style={{width: '50%', textAlign: 'center', alignSelf: 'center'}}>{currentDate}</h4>
+                <h4 className='dateSubtitle'>{currentDate}</h4>
                 <div className={clicked ? 'hide' : 'button-container'}>
                     {data ? <ViewRating data={data} setPlaceholder={setPlaceholder} placeholder={placeholder} setPassedData={setPassedData} /> : <>
                         <button className='option in-modal' style={{backgroundColor: '#006d05'}} onClick={e => handleButtonClick(e)}>Amazing</button>

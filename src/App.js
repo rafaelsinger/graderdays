@@ -17,7 +17,7 @@ import { DayRatingContext } from './DayRatingContext';
 function App() {
   const [value, onChange] = useState(new Date());
   const [rating, setRating] = useState(null); 
-  const [auth, setAuth] = useLocalStorage('auth', true); //! SET BACK TO FALSE
+  const [auth, setAuth] = useLocalStorage('auth', false); //! SET BACK TO FALSE
   const [name, setName] = useLocalStorage('name', '');
   const [didDayRating, setDidDayRating] = useLocalStorage('day-rate', false);
 
